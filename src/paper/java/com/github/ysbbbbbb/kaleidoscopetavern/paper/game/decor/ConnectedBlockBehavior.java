@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * <p>Every family-specific property name, output value and compatible neighbour
  * state lives in CraftEngine configuration. Java only performs the O(1)
- * neighbour reads that CE 26.7.4 cannot declare in YAML.</p>
+ * neighbour reads that CE 26.8 cannot declare in YAML.</p>
  */
 public final class ConnectedBlockBehavior extends BukkitBlockBehavior {
     public static final Key TYPE = Key.of("kaleidoscope_tavern", "connected_block");

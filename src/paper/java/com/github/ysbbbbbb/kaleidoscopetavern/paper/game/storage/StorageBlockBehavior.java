@@ -71,7 +71,7 @@ import java.util.function.Consumer;
  *
  * <p>CraftEngine configuration owns the selector, slot transforms, item rules,
  * sounds, facing transforms, launch parameters and particles. Java only
- * supplies the reusable block-entity mechanism that CE 26.7.4's native
+ * supplies the reusable block-entity mechanism that CE 26.8's native
  * single-slot display behavior cannot express.</p>
  */
 public final class StorageBlockBehavior extends BukkitBlockBehavior implements EntityBlock {

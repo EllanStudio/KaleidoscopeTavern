@@ -87,11 +87,13 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
     private static final int EXPECTED_ITEMS = 571; // 157 public items + 414 private render helpers
     private static final int EXPECTED_BLOCKS = 44;
     private static final int EXPECTED_FURNITURE = 116;
-    // 已验证的 CraftEngine minor 版本。低于 26.7 直接拒绝启动（使用了
-    // PrioritizedFallOnHandler / BlockEntityElement Experimental / NMS proxy 等
-    // 非稳定 API），高于已验证 minor 仅警告。
+    // 已验证的 CraftEngine 版本。低于 26.8.1 直接拒绝启动（使用了
+    // dynamicRenderer()、无参 FurnitureController.onUnload()、
+    // PrioritizedFallOnHandler、BlockEntityElement Experimental / NMS proxy
+    // 等非稳定 API），高于已验证版本仅警告。
     private static final int MIN_CE_MAJOR = 26;
-    private static final int MIN_CE_MINOR = 7;
+    private static final int MIN_CE_MINOR = 8;
+    private static final int MIN_CE_PATCH = 1;
 
     private PackInstaller.Result packResult;
     private CustomCropsInstaller.Result customCropsResult;
@@ -327,7 +329,7 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
         verifyContent(startup);
     }
 
-    /** 启动时 fail-fast：拒绝低于已验证的 CraftEngine minor 版本。 */
+    /** 启动时 fail-fast：拒绝低于已验证的 CraftEngine 版本。 */
     private void verifyCraftEngineVersion() {
         Plugin craftEngine = getServer().getPluginManager().getPlugin("CraftEngine");
         if (craftEngine == null) {
@@ -341,19 +343,37 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
                     + craftEngine.getPluginMeta().getVersion() + "，跳过版本校验。");
             return;
         }
-        if (parts[0] < MIN_CE_MAJOR
-                || (parts[0] == MIN_CE_MAJOR && parts[1] < MIN_CE_MINOR)) {
+        int versionComparison = compareVersion(
+                parts, MIN_CE_MAJOR, MIN_CE_MINOR, MIN_CE_PATCH);
+        if (versionComparison < 0) {
             getLogger().severe("CraftEngine " + craftEngine.getPluginMeta().getVersion()
                     + " 低于已验证的 " + MIN_CE_MAJOR + "." + MIN_CE_MINOR
-                    + "（压榨桶使用 PrioritizedFallOnHandler / BlockEntityElement "
-                    + "Experimental / NMS proxy 等非稳定 API），拒绝启动。");
+                    + "." + MIN_CE_PATCH
+                    + "（使用 26.8 FurnitureController 生命周期 ABI、"
+                    + "PrioritizedFallOnHandler / BlockEntityElement Experimental / NMS proxy "
+                    + "等非稳定 API），拒绝启动。");
             getServer().getPluginManager().disablePlugin(this);
-        } else if (parts[1] > MIN_CE_MINOR) {
+        } else if (versionComparison > 0) {
             getLogger().warning("CraftEngine " + craftEngine.getPluginMeta().getVersion()
                     + " 高于已验证的 " + MIN_CE_MAJOR + "." + MIN_CE_MINOR
+                    + "." + MIN_CE_PATCH
                     + "，压榨桶 BlockEntityElement 属于 Experimental API，"
                     + "建议实测后再正式启用。");
         }
+    }
+
+    private static int compareVersion(
+            int[] actual, int expectedMajor, int expectedMinor, int expectedPatch) {
+        int majorComparison = Integer.compare(actual[0], expectedMajor);
+        if (majorComparison != 0) {
+            return majorComparison;
+        }
+        int minorComparison = Integer.compare(actual[1], expectedMinor);
+        if (minorComparison != 0) {
+            return minorComparison;
+        }
+        int actualPatch = actual.length >= 3 ? actual[2] : 0;
+        return Integer.compare(actualPatch, expectedPatch);
     }
 
     private static int[] parseVersion(String version) {

@@ -17,7 +17,7 @@
 | --- | --- |
 | Minecraft / Paper | **26.2 only** |
 | Java | **25** |
-| CraftEngine | **26.7.4** |
+| CraftEngine | **26.8.1** |
 | CustomCrops | **3.6.52** |
 
 PlaceholderAPI 与 CustomNameplates 仅在需要外部酒效 HUD 时安装。
@@ -25,7 +25,7 @@ PlaceholderAPI 与 CustomNameplates 仅在需要外部酒效 HUD 时安装。
 ## 安装
 
 1. 使用 Java 25 启动 Paper 26.2 服务端。
-2. 安装 CraftEngine 26.7.4 与 CustomCrops 3.6.52。
+2. 安装 CraftEngine 26.8.1 与 CustomCrops 3.6.52。
 3. 将 `KaleidoscopeTavern-Paper-0.0.1.jar` 放入 `plugins/`。
 4. 启动服务端。插件会自动安装 CraftEngine 内容与 CustomCrops 葡萄配置。
 5. 按 CraftEngine 的方式部署生成的资源包，让客户端加载。
