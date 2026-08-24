@@ -8432,6 +8432,24 @@
       },
       "behaviors": {
         "type": "kaleidoscope_tavern:pressing_tub_block"
+      },
+      "loot": {
+        "pools": [
+          {
+            "rolls": 1,
+            "conditions": [
+              {
+                "type": "survives_explosion"
+              }
+            ],
+            "entries": [
+              {
+                "type": "item",
+                "item": "kaleidoscope_tavern:pressing_tub"
+              }
+            ]
+          }
+        ]
       }
     },
     "kaleidoscope_tavern:tap": {
