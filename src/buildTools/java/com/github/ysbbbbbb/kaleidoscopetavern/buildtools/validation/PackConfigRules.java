@@ -92,7 +92,7 @@ public final class PackConfigRules {
         validateTable(items, renderItems, blocks, furniture);
         validateBlockSettingsParity(blocks);
         validateBoardAndPendant(furniture);
-        validatePressingTub(furniture);
+        validatePressingTub(items, blocks, furniture);
         validatePaintings(items, furniture);
         validateSofa(items, renderItems, blocks, furniture);
         validateBarCounter(items, renderItems, blocks, furniture);
@@ -571,7 +571,8 @@ public final class PackConfigRules {
         }
     }
 
-    private void validatePressingTub(JsonObject furniture) {
+    private void validatePressingTub(JsonObject items, JsonObject blocks,
+                                     JsonObject furniture) {
         String pressingTubId = NAMESPACE + ":pressing_tub";
         if (furniture.has(pressingTubId)) {
             throw new ValidationException("Ground pressing tub must exist only as a CE block");
@@ -579,6 +580,53 @@ public final class PackConfigRules {
         if (!furniture.has(WALL_PRESSING_TUB_ID)) {
             throw new ValidationException("The non-pressable wall tub must be a private native CE furniture");
         }
+
+        JsonObject groundLoot = new JsonObject();
+        JsonArray groundPools = new JsonArray();
+        JsonObject groundPool = new JsonObject();
+        groundPool.addProperty("rolls", 1);
+        JsonArray groundConditions = new JsonArray();
+        JsonObject survivesExplosion = new JsonObject();
+        survivesExplosion.addProperty("type", "survives_explosion");
+        groundConditions.add(survivesExplosion);
+        groundPool.add("conditions", groundConditions);
+        JsonArray groundEntries = new JsonArray();
+        JsonObject groundEntry = new JsonObject();
+        groundEntry.addProperty("type", "item");
+        groundEntry.addProperty("item", pressingTubId);
+        groundEntries.add(groundEntry);
+        groundPool.add("entries", groundEntries);
+        groundPools.add(groundPool);
+        groundLoot.add("pools", groundPools);
+        if (!groundLoot.equals(blocks.getAsJsonObject(pressingTubId).get("loot"))) {
+            throw new ValidationException("Ground pressing-tub item drop must be CE-configured");
+        }
+
+        JsonArray expectedPlacementBehaviors = new JsonArray();
+        JsonObject groundPlacement = new JsonObject();
+        groundPlacement.addProperty("type", "ground_block_item");
+        groundPlacement.addProperty("block", pressingTubId);
+        expectedPlacementBehaviors.add(groundPlacement);
+        JsonObject ceilingPlacement = new JsonObject();
+        ceilingPlacement.addProperty("type", "ceiling_block_item");
+        ceilingPlacement.addProperty("block", pressingTubId);
+        expectedPlacementBehaviors.add(ceilingPlacement);
+        JsonObject wallPlacement = new JsonObject();
+        wallPlacement.addProperty("type", "furniture_item");
+        wallPlacement.addProperty("furniture", WALL_PRESSING_TUB_ID);
+        JsonObject wallRules = new JsonObject();
+        JsonObject wallRule = new JsonObject();
+        wallRule.addProperty("rotation", "four");
+        wallRule.addProperty("alignment", "center");
+        wallRules.add("wall", wallRule);
+        wallPlacement.add("rules", wallRules);
+        expectedPlacementBehaviors.add(wallPlacement);
+        if (!expectedPlacementBehaviors.equals(
+                items.getAsJsonObject(pressingTubId).get("behaviors"))) {
+            throw new ValidationException(
+                    "Pressing tub must retain flat ground/ceiling and tilted wall placement");
+        }
+
         JsonObject wallTub = furniture.getAsJsonObject(WALL_PRESSING_TUB_ID);
         if (!wallTub.getAsJsonObject("settings").get("item").getAsString().equals(pressingTubId)) {
             throw new ValidationException("Wall pressing-tub furniture must map back to the public tub item");

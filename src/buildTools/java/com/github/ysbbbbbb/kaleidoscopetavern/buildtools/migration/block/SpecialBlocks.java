@@ -216,6 +216,9 @@ final class SpecialBlocks {
         config.add("settings", BlockBehaviors.blockSettings("pressing_tub", hasItem));
         config.add("behaviors", BlockBehaviors.behaviorFor(
                 "pressing_tub", Set.of("facing", "waterlogged"), null));
+        // Unlike ordinary blocks, this special builder bypasses the shared
+        // finalization path, so it must attach the public item drop explicitly.
+        BlockFinalization.addLoot(config, "pressing_tub", hasItem);
         return new TubResult(config, appearances.size());
     }
 

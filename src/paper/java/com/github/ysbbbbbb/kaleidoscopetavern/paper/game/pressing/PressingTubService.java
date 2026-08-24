@@ -190,6 +190,15 @@ public final class PressingTubService implements PressingTubBlockBehavior.Handle
         if (cePlayer == null) {
             return InteractionResult.FAIL;
         }
+        // Forge skips the tub's container interaction when secondary use is
+        // placing another tub. Ground blocks already receive CE's normal item
+        // fallback; wall tubs are interaction entities and must explicitly
+        // yield so CE can run the held tub's wall-furniture placement.
+        if (PressingTubSemantics.shouldDelegateTubPlacement(
+                cePlayer.isSecondaryUseActive(),
+                held == null || held.isEmpty() ? null : held.id().toString())) {
+            return InteractionResult.PASS;
+        }
         Location location = tub.interactionLocation();
         if (!BukkitCraftEngine.instance().antiGriefProvider().test(
                 (Player) cePlayer.platformPlayer(), Flag.OPEN_CONTAINER, location)) {
