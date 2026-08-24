@@ -31,7 +31,7 @@ dependencies separately. The build audits both boundaries.
 
 - Modules used: `craft-engine-core`, `craft-engine-bukkit`, and
   `craft-engine-bukkit-proxy`
-- Versions used by this project: 26.7.4 / proxy 26.7
+- Version used by this project: 26.8.1 (core, Bukkit, and proxy)
 - Project: https://github.com/Xiao-MoMi/craft-engine
 - License: GNU General Public License v3.0 (GPL-3.0)
 - Distribution: not bundled; installed separately on the server

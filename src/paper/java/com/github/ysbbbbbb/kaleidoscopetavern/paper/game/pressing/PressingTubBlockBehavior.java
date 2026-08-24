@@ -490,7 +490,7 @@ public final class PressingTubBlockBehavior extends BukkitBlockBehavior
                 return;
             }
             element.invalidate();
-            BlockEntityRenderer renderer = blockEntity.renderer();
+            BlockEntityRenderer renderer = blockEntity.dynamicRenderer();
             for (Player tracked : chunk.getTrackedBy()) {
                 renderer.update(tracked);
             }

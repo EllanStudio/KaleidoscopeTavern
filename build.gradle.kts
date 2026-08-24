@@ -11,8 +11,6 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.momirealms.net/releases/")
-    // CraftEngine 26.8 is only published as a snapshot for now.
-    maven("https://repo.momirealms.net/snapshots/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.catnies.top/releases")
 }
@@ -45,10 +43,8 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.14.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("net.momirealms:craft-engine-core:${providers.gradleProperty("craft_engine_version").get()}")
-    // CraftEngine publishes its libraries as dependency-less poms; the runtime
-    // server supplies them. Tests that model CE types (e.g. the station visual
-    // diff state machine) need the companion libraries on the worker classpath.
-    testRuntimeOnly("net.momirealms:craft-engine-adventure:${providers.gradleProperty("craft_engine_version").get()}")
+    // CraftEngine 26.8.1 publishes core as a shadowed release artifact; the
+    // former craft-engine-adventure companion stopped at 26.7.4.
     // MiniMessage round-trips in CustomEffectHudSemanticsTest use the same
     // adventure version Paper ships at runtime.
     testImplementation("io.papermc.paper:paper-api:${providers.gradleProperty("paper_version").get()}")
