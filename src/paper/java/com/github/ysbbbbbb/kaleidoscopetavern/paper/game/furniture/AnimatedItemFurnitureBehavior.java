@@ -32,6 +32,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
 /** CE-tracked packet-only item displays for the shaker and rotating stool body. */
 public final class AnimatedItemFurnitureBehavior extends FurnitureBehaviorTemplate {
@@ -243,7 +244,7 @@ public final class AnimatedItemFurnitureBehavior extends FurnitureBehaviorTempla
         }
 
         @Override
-        public void gatherInteractableEntityId(Consumer<Integer> collector) {
+        public void gatherInteractableEntityId(IntConsumer collector) {
         }
 
         @Override

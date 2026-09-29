@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
 /**
  * Renders CE display-slot contents as packet-only furniture elements.
@@ -203,7 +204,7 @@ public final class StorageVisualFurnitureBehavior extends FurnitureBehaviorTempl
         }
 
         @Override
-        public void gatherInteractableEntityId(Consumer<Integer> collector) {
+        public void gatherInteractableEntityId(IntConsumer collector) {
         }
 
         @Override

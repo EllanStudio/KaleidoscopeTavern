@@ -458,7 +458,7 @@ public final class DisplayStorageService {
     private void warnReflectionBridge() {
         if (!reflectionWarningLogged) {
             reflectionWarningLogged = true;
-            plugin.getLogger().severe("CraftEngine 26.8 display-slot bridge is unavailable; "
+            plugin.getLogger().severe("CraftEngine 26.9 display-slot bridge is unavailable; "
                     + "source-compatible storage interactions, visuals and launchers are disabled.");
         }
     }

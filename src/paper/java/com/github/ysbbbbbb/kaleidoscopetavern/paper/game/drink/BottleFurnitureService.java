@@ -12,8 +12,6 @@ import net.momirealms.craftengine.bukkit.item.BukkitItem;
 import net.momirealms.craftengine.core.entity.player.InteractionHand;
 import net.momirealms.craftengine.core.entity.player.InteractionResult;
 import net.momirealms.craftengine.core.item.Item;
-import net.momirealms.craftengine.core.plugin.context.ContextHolder;
-import net.momirealms.craftengine.core.plugin.context.parameter.DirectContextParameters;
 import net.momirealms.craftengine.core.world.context.InteractEntityContext;
 import net.momirealms.craftengine.libraries.antigrieflib.Flag;
 import org.bukkit.Bukkit;
@@ -193,10 +191,7 @@ public final class BottleFurnitureService implements Listener {
                 return false;
             }
 
-            ContextHolder.Builder context = ContextHolder.builder()
-                    .withParameter(DirectContextParameters.FURNITURE, furniture)
-                    .withParameter(DirectContextParameters.POSITION, furniture.position());
-            FurnitureBreakEvent breakEvent = new FurnitureBreakEvent(player, furniture, context);
+            FurnitureBreakEvent breakEvent = new FurnitureBreakEvent(player, furniture);
             // Projectile shattering never drops the stored bottles in Forge.
             // Set this before dispatch so this service's normal break-drop
             // listener and other integrations observe the correct semantics.
