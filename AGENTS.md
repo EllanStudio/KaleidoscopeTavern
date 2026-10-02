@@ -8,7 +8,7 @@
 
 ## 当前项目事实
 
-- 运行目标仅为 Minecraft / Paper `26.2`，使用 Java 25、CraftEngine `26.8.1` 与 CustomCrops `3.6.52`。
+- 运行目标仅为 Minecraft / Paper `26.2`，使用 Java 25、CraftEngine `26.9.1` 与 CustomCrops `3.6.52`。
   CraftEngine 依赖从 `https://repo.momirealms.net/releases/` 获取。
 - 这是服务端插件重写，不再编译或加载 Forge。Paper 主源码位于 `src/paper/java`，插件资源位于
   `src/paper/resources`，CraftEngine 项目位于 `src/paper/pack`，测试位于 `src/paperTest/java`。
@@ -35,11 +35,17 @@
   执行饮用；雪克杯在物品态与家具态之间迁移其原料和产物数据。
 - 家具业务状态使用家具元实体数据；CE 方块业务状态使用方块实体 NBT。静态碰撞、座位、放置、朝向、含水、
   发光和掉落优先使用 CraftEngine 原生行为或配置；只有原生展示槽无法表达的多槽点击路由、过滤与变换才保留 Java 方块实体。
-- CraftEngine API 以 `26.8.1` 固定版本为准。动态展示差量、自定义方块实体和源玩法特有的邻居拓扑会
+- CraftEngine API 以 `26.9.1` 固定版本为准。动态展示差量、自定义方块实体和源玩法特有的邻居拓扑会
   接触该固定版本的非稳定实现，升级 CraftEngine 前必须重新编译并做服务器实测。
 - 26.8 相对 26.7.4 唯一的破坏性变更是 `FurnitureController.onUnload(boolean isStopping)` 改为 `onUnload()`；
   CE 不再区分"关服卸载"与"区块卸载"，因此 `LifecycleFurnitureBehavior.Handler#onUnavailable` 与
   `TickingFurnitureBehavior.Handler#onUnload` 也去掉了对应的 `stopping` 形参（原本无任何消费者使用）。
+- 26.9.1 相对 26.8.1 影响本项目的破坏性变更只有两处：`FurnitureElement.gatherInteractableEntityId` 的参数由
+  `Consumer<Integer>` 改为 `IntConsumer`（同时移除了 `hasCondition()`/`supportsTransform()`，`canSee` 改收
+  `Player`，本项目均未覆写）；`FurnitureBreakEvent` 构造器去掉了 `ContextHolder.Builder` 参数。因为前者是
+  接口 ABI 变化，插件启动时的最低 CE 版本同步提升到 `26.9.1`。26.9 还把家具 `item_display`/`item`/
+  `armor_stand` 元素的 `tint_source` 默认值改为 `[dyed_color]`，并默认不再占用 `cave_vines[age=25]`；
+  本项目家具不带 `dyed_color` 来源物品，20 个 `cave_vines` auto_state 也仍在剩余 48 个可用状态之内。`DisplayStorageService` 反射的 `savedItem`/`saveDisplayItem` 在 26.9.1 中保持不变。
 - 26.8 新增的 JS 脚本默认关闭，内置只绑定日志、调度和事件上下文，不直接暴露 Tavern 服务。Nashorn 与
   GraalJS 均可通过宿主 Java 互操作强行访问 Bukkit、插件类及 CE 非稳定实现，但这只是把相同的 Java/NMS
   依赖迁到无类型脚本；`@Subscribe` 仍会注册 Bukkit 全局监听，并额外增加脚本调用。CE 配置事件内的 `js`

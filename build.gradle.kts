@@ -43,7 +43,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.14.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("net.momirealms:craft-engine-core:${providers.gradleProperty("craft_engine_version").get()}")
-    // CraftEngine 26.8.1 publishes core as a shadowed release artifact; the
+    // CraftEngine 26.9.1 publishes core as a shadowed release artifact; the
     // former craft-engine-adventure companion stopped at 26.7.4.
     // MiniMessage round-trips in CustomEffectHudSemanticsTest use the same
     // adventure version Paper ships at runtime.

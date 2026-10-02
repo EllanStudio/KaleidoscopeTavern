@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
 /** Renders persisted board text through CE-tracked packet-only text elements. */
 public final class BoardTextFurnitureBehavior extends FurnitureBehaviorTemplate {
@@ -236,7 +237,7 @@ public final class BoardTextFurnitureBehavior extends FurnitureBehaviorTemplate 
         }
 
         @Override
-        public void gatherInteractableEntityId(Consumer<Integer> collector) {
+        public void gatherInteractableEntityId(IntConsumer collector) {
         }
 
         @Override

@@ -24,7 +24,7 @@ import java.util.Optional;
 /** Sends visual-only entity state through CraftEngine's pinned NMS proxies. */
 final class ViewerEffectPackets {
     // Entity.DATA_CUSTOM_NAME is part of the base Entity metadata layout. The
-    // project is pinned to Paper 26.2 and CE 26.8, just like the other proxy
+    // project is pinned to Paper 26.2 and CE 26.9, just like the other proxy
     // bridges in this plugin.
     private static final int CUSTOM_NAME_DATA_ID = 2;
     private static final List<Object> UPSIDE_DOWN_NAME_DATA = List.of(

@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
 /**
  * Renders the dynamic contents of pressing tubs and barrels as one CE-managed
@@ -317,7 +318,7 @@ public final class StationVisualFurnitureBehavior extends FurnitureBehaviorTempl
         }
 
         @Override
-        public void gatherInteractableEntityId(Consumer<Integer> collector) {
+        public void gatherInteractableEntityId(IntConsumer collector) {
         }
 
         @Override
