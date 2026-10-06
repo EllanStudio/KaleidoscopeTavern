@@ -18,11 +18,16 @@ import java.util.Set;
  * cannot throw NoSuchFieldError on the other supported server line.</p>
  */
 public final class SwingAnimationResolver {
-    private static final ComponentNames NAMES = classify(
-            Arrays.stream(DataComponentTypes.class.getFields()).map(Field::getName).toList());
-    private static final DataComponentType.Valued<SwingAnimation> LEGACY = resolve("SWING_ANIMATION");
-    private static final DataComponentType.Valued<SwingAnimation> ATTACK = resolve("ATTACK_ANIMATION");
-    private static final DataComponentType.Valued<SwingAnimation> INTERACT = resolve("INTERACT_ANIMATION");
+    private static final class RuntimeComponents {
+        private static final ComponentNames NAMES = classify(
+                Arrays.stream(DataComponentTypes.class.getFields()).map(Field::getName).toList());
+        private static final DataComponentType.Valued<SwingAnimation> LEGACY = resolve("SWING_ANIMATION");
+        private static final DataComponentType.Valued<SwingAnimation> ATTACK = resolve("ATTACK_ANIMATION");
+        private static final DataComponentType.Valued<SwingAnimation> INTERACT = resolve("INTERACT_ANIMATION");
+
+        private RuntimeComponents() {
+        }
+    }
 
     private SwingAnimationResolver() {
     }
@@ -41,29 +46,29 @@ public final class SwingAnimationResolver {
     }
 
     public static ComponentNames componentNames() {
-        return NAMES;
+        return RuntimeComponents.NAMES;
     }
 
     /** Sets the same animation on both split fields, or the legacy field. */
     public static void setUnified(ItemStack item, SwingAnimation animation) {
-        if (NAMES.split() && ATTACK != null && INTERACT != null) {
-            item.setData(ATTACK, animation);
-            item.setData(INTERACT, animation);
-        } else if (LEGACY != null) {
-            item.setData(LEGACY, animation);
+        if (RuntimeComponents.NAMES.split() && RuntimeComponents.ATTACK != null && RuntimeComponents.INTERACT != null) {
+            item.setData(RuntimeComponents.ATTACK, animation);
+            item.setData(RuntimeComponents.INTERACT, animation);
+        } else if (RuntimeComponents.LEGACY != null) {
+            item.setData(RuntimeComponents.LEGACY, animation);
         }
     }
 
     public static void unsetUnified(ItemStack item) {
-        if (NAMES.split()) {
-            if (ATTACK != null) {
-                item.unsetData(ATTACK);
+        if (RuntimeComponents.NAMES.split()) {
+            if (RuntimeComponents.ATTACK != null) {
+                item.unsetData(RuntimeComponents.ATTACK);
             }
-            if (INTERACT != null) {
-                item.unsetData(INTERACT);
+            if (RuntimeComponents.INTERACT != null) {
+                item.unsetData(RuntimeComponents.INTERACT);
             }
-        } else if (LEGACY != null) {
-            item.unsetData(LEGACY);
+        } else if (RuntimeComponents.LEGACY != null) {
+            item.unsetData(RuntimeComponents.LEGACY);
         }
     }
 
