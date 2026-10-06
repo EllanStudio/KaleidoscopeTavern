@@ -5,7 +5,6 @@ import com.github.ysbbbbbb.kaleidoscopetavern.paper.catalog.ContentCatalog.Effec
 import com.github.ysbbbbbb.kaleidoscopetavern.paper.game.shaker.ShakerSemantics;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
-import io.papermc.paper.datacomponent.item.SwingAnimation;
 import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import net.kyori.adventure.text.Component;
@@ -59,10 +58,6 @@ public final class ItemService {
             .consumeSeconds(3600F)
             .animation(ItemUseAnimation.SPYGLASS)
             .hasConsumeParticles(false)
-            .build();
-    private static final SwingAnimation SHAKER_SWING_ANIMATION = SwingAnimation.swingAnimation()
-            .type(SwingAnimation.Animation.NONE)
-            .duration(4)
             .build();
     private static final Map<Integer, String> COLOR_NAMES_BY_RGB = Map.ofEntries(
             Map.entry(0x000000, "black"), Map.entry(0x0000AA, "dark_blue"),
@@ -495,10 +490,8 @@ public final class ItemService {
     }
 
     /**
-     * Keeps the CE spyglass consumable and swing animation present on
-     * ordinary shakers and absent on result-bearing shakers. Removing the
-     * components stops the vanilla client from predicting a use animation for
-     * a finished shaker, which matches the Forge item's pass on right-click.
+     * Keeps the CE spyglass consumable present on ordinary shakers and absent
+     * on result-bearing shakers, matching the Forge item's right-click behavior.
      */
     public ItemStack syncShakerUseComponents(ItemStack stack) {
         if (stack == null || stack.isEmpty() || !PREFIX.concat("shaker").equals(id(stack))) {
@@ -508,12 +501,8 @@ public final class ItemService {
             if (!stack.hasData(DataComponentTypes.CONSUMABLE)) {
                 stack.setData(DataComponentTypes.CONSUMABLE, SHAKER_CONSUMABLE);
             }
-            if (!stack.hasData(DataComponentTypes.SWING_ANIMATION)) {
-                stack.setData(DataComponentTypes.SWING_ANIMATION, SHAKER_SWING_ANIMATION);
-            }
         } else {
             stack.unsetData(DataComponentTypes.CONSUMABLE);
-            stack.unsetData(DataComponentTypes.SWING_ANIMATION);
         }
         return stack;
     }

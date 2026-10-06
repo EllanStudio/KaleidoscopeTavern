@@ -174,7 +174,7 @@ public final class LegacyMigrationOrchestrator {
     private static void writeReport(MigrationContext context, Map<String,Integer> metrics) throws IOException {
         JsonObject report = new JsonObject();
         report.addProperty("source", "KaleidoscopeTavern Forge 1.20.1 data generators");
-        report.addProperty("target", "Paper 26.3 + CraftEngine 26.9.1");
+        report.addProperty("target", "Paper 26.3 + CraftEngine 26.10-SNAPSHOT");
         metrics.forEach(report::addProperty);
         JsonObject document = new JsonObject(); document.add("kaleidoscope_tavern_migration", report);
         MigrationDataIO.writeJson(context.configuration().resolve("migration-report.json"), document);

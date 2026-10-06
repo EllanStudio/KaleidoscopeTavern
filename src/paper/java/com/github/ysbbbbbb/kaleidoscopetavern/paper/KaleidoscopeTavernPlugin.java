@@ -87,13 +87,13 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
     private static final int EXPECTED_ITEMS = 571; // 157 public items + 414 private render helpers
     private static final int EXPECTED_BLOCKS = 44;
     private static final int EXPECTED_FURNITURE = 116;
-    // 已验证的 CraftEngine 版本。低于 26.9.1 直接拒绝启动（使用了
+    // CraftEngine dev 分支最低版本。低于 26.10 直接拒绝启动（使用了
     // dynamicRenderer()、无参 FurnitureController.onUnload()、
     // FurnitureElement.gatherInteractableEntityId(IntConsumer)、
     // PrioritizedFallOnHandler、BlockEntityElement Experimental / NMS proxy
     // 等非稳定 API），高于已验证版本仅警告。
     private static final int MIN_CE_MAJOR = 26;
-    private static final int MIN_CE_MINOR = 9;
+    private static final int MIN_CE_MINOR = 10;
     private static final int MIN_CE_PATCH = 1;
 
     private PackInstaller.Result packResult;
@@ -350,7 +350,7 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
             getLogger().severe("CraftEngine " + craftEngine.getPluginMeta().getVersion()
                     + " 低于已验证的 " + MIN_CE_MAJOR + "." + MIN_CE_MINOR
                     + "." + MIN_CE_PATCH
-                    + "（使用 26.9 FurnitureElement / FurnitureController ABI、"
+                    + "（使用 CraftEngine 26.10 dev API；FurnitureElement / FurnitureController ABI、"
                     + "PrioritizedFallOnHandler / BlockEntityElement Experimental / NMS proxy "
                     + "等非稳定 API），拒绝启动。");
             getServer().getPluginManager().disablePlugin(this);

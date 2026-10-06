@@ -10,6 +10,8 @@ val customCropsVersion = providers.gradleProperty("custom_crops_version")
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
+    // CraftEngine dev branch snapshots (26.10-SNAPSHOT).
+    maven("https://repo.momirealms.net/snapshots/")
     maven("https://repo.momirealms.net/releases/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.catnies.top/releases")
@@ -43,8 +45,9 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.14.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("net.momirealms:craft-engine-core:${providers.gradleProperty("craft_engine_version").get()}")
-    // CraftEngine 26.9.1 publishes core as a shadowed release artifact; the
-    // former craft-engine-adventure companion stopped at 26.7.4.
+    // CraftEngine 26.10-SNAPSHOT is the latest dev-branch snapshot; resolve it
+    // from the snapshots repository above. The older adventure companion remains
+    // on its last published snapshot because this project does not use it directly.
     // MiniMessage round-trips in CustomEffectHudSemanticsTest use the same
     // adventure version Paper ships at runtime.
     testImplementation("io.papermc.paper:paper-api:${providers.gradleProperty("paper_version").get()}")
