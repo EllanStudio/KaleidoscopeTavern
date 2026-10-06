@@ -94,7 +94,7 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
     // 等非稳定 API），高于已验证版本仅警告。
     private static final int MIN_CE_MAJOR = 26;
     private static final int MIN_CE_MINOR = 10;
-    private static final int MIN_CE_PATCH = 1;
+    private static final int MIN_CE_PATCH = 0;
 
     private PackInstaller.Result packResult;
     private CustomCropsInstaller.Result customCropsResult;
@@ -363,7 +363,7 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
         }
     }
 
-    private static int compareVersion(
+    static int compareVersion(
             int[] actual, int expectedMajor, int expectedMinor, int expectedPatch) {
         int majorComparison = Integer.compare(actual[0], expectedMajor);
         if (majorComparison != 0) {
@@ -377,7 +377,7 @@ public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listen
         return Integer.compare(actualPatch, expectedPatch);
     }
 
-    private static int[] parseVersion(String version) {
+    static int[] parseVersion(String version) {
         String[] segments = version.split("\\.");
         int[] parts = new int[segments.length];
         for (int index = 0; index < segments.length; index++) {
