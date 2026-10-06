@@ -53,7 +53,7 @@ public final class HangingGrapeCropBehavior extends BukkitBlockBehavior {
 
     @Override
     public Object updateShape(Object thisBlock, Object[] args) {
-        // Minecraft 26.2 HangingRootsBlock only revalidates its support when
+        // Minecraft 26.3 HangingRootsBlock only revalidates its support when
         // the UP neighbour changes. CE passes that neighbour's NMS BlockState
         // directly, so this hot path needs neither a Bukkit block lookup nor
         // a second world read.

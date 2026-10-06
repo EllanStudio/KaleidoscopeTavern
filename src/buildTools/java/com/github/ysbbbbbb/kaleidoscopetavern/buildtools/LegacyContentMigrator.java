@@ -137,7 +137,7 @@ public final class LegacyContentMigrator {
                                     LegacyMigrationOrchestrator.Result result) {
         JsonObject report = new JsonObject();
         report.addProperty("source", "KaleidoscopeTavern Forge 1.20.1 data generators");
-        report.addProperty("target", "Paper 26.2 + CraftEngine 26.9");
+        report.addProperty("target", "Paper 26.3 + CraftEngine 26.10-SNAPSHOT");
         result.metrics().forEach(report::addProperty);
         Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
         out.println(gson.toJson(report));

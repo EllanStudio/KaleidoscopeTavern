@@ -31,7 +31,7 @@ dependencies separately. The build audits both boundaries.
 
 - Modules used: `craft-engine-core`, `craft-engine-bukkit`, and
   `craft-engine-bukkit-proxy`
-- Version used by this project: 26.9.1 (core, Bukkit, and proxy)
+- Version used by this project: 26.10-SNAPSHOT (core, Bukkit, and proxy; dev branch snapshot)
 - Project: https://github.com/Xiao-MoMi/craft-engine
 - License: GNU General Public License v3.0 (GPL-3.0)
 - Distribution: not bundled; installed separately on the server
@@ -47,7 +47,7 @@ dependencies separately. The build audits both boundaries.
 ### Paper API
 
 - Module used: `paper-api`
-- Version used by this project: 26.2 build 65 beta
+- Version used by this project: 26.3 build 157 beta
 - Project: https://github.com/PaperMC/Paper
 - License: see the upstream repository and individual source notices
 - Distribution: not bundled; supplied by the Paper server

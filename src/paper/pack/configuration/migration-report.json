@@ -1,7 +1,7 @@
 {
   "kaleidoscope_tavern_migration": {
     "source": "KaleidoscopeTavern Forge 1.20.1 data generators",
-    "target": "Paper 26.2 + CraftEngine 26.9",
+    "target": "Paper 26.3 + CraftEngine 26.10-SNAPSHOT",
     "items": 157,
     "vanilla_item_extensions": 4,
     "blocks": 44,

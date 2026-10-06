@@ -1,4 +1,4 @@
-name: Paper 26.2 build
+name: Paper 26.3 build
 
 on:
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
       - name: Upload plugin
         uses: actions/upload-artifact@v4
         with:
-          name: KaleidoscopeTavern-Paper-26.2
+          name: KaleidoscopeTavern-Paper-26.3
           path: |
             build/libs/KaleidoscopeTavern-Paper-*.jar
             !build/libs/*-sources.jar

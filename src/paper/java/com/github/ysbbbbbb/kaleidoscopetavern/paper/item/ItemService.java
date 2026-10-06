@@ -495,10 +495,9 @@ public final class ItemService {
     }
 
     /**
-     * Keeps the CE spyglass consumable and swing animation present on
-     * ordinary shakers and absent on result-bearing shakers. Removing the
-     * components stops the vanilla client from predicting a use animation for
-     * a finished shaker, which matches the Forge item's pass on right-click.
+     * Keeps the CE spyglass consumable and swing animation present on ordinary
+     * shakers and absent on result-bearing shakers, matching the Forge item's
+     * right-click behavior on both the old and split component layouts.
      */
     public ItemStack syncShakerUseComponents(ItemStack stack) {
         if (stack == null || stack.isEmpty() || !PREFIX.concat("shaker").equals(id(stack))) {
@@ -508,12 +507,10 @@ public final class ItemService {
             if (!stack.hasData(DataComponentTypes.CONSUMABLE)) {
                 stack.setData(DataComponentTypes.CONSUMABLE, SHAKER_CONSUMABLE);
             }
-            if (!stack.hasData(DataComponentTypes.SWING_ANIMATION)) {
-                stack.setData(DataComponentTypes.SWING_ANIMATION, SHAKER_SWING_ANIMATION);
-            }
+            SwingAnimationResolver.setUnified(stack, SHAKER_SWING_ANIMATION);
         } else {
             stack.unsetData(DataComponentTypes.CONSUMABLE);
-            stack.unsetData(DataComponentTypes.SWING_ANIMATION);
+            SwingAnimationResolver.unsetUnified(stack);
         }
         return stack;
     }

@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 
-/** Paper 26.2 particle adapter for a tap flow selected by {@link TapFlowAppearance}. */
+/** Paper 26.3 particle adapter for a tap flow selected by {@link TapFlowAppearance}. */
 final class TapParticleEmitter {
     private static final int COLORED_DROP_INTERVAL_TICKS = 2;
     private static final int COLORED_DROP_DURATION_TICKS = 8;
@@ -75,7 +75,7 @@ final class TapParticleEmitter {
         }
         if (coloredDrop == null) {
             // DUST is an expanding powder sprite and scales supplied motion
-            // down on the client. TRAIL is Paper 26.2's native RGB particle
+            // down on the client. TRAIL is Paper 26.3's native RGB particle
             // that interpolates smoothly to an exact target, so it reads as
             // a falling liquid bead without a server-side entity or task.
             coloredDrop = new Particle.Trail(
