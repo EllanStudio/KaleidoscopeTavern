@@ -8,7 +8,7 @@
 
 ## 当前项目事实
 
-- 运行目标仅为 Minecraft / Paper `26.2`，使用 Java 25、CraftEngine `26.9.1` 与 CustomCrops `3.6.52`。
+- 运行目标仅为 Minecraft / Paper `26.3` (compile target `26.3.build.157-beta`)，使用 Java 25、CraftEngine `26.9.1` 与 CustomCrops `3.6.52`。
   CraftEngine 依赖从 `https://repo.momirealms.net/releases/` 获取。
 - 这是服务端插件重写，不再编译或加载 Forge。Paper 主源码位于 `src/paper/java`，插件资源位于
   `src/paper/resources`，CraftEngine 项目位于 `src/paper/pack`，测试位于 `src/paperTest/java`。

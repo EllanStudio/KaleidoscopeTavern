@@ -2,7 +2,7 @@ package com.github.ysbbbbbb.kaleidoscopetavern.buildtools.migration.core;
 
 import java.util.Map;
 
-/** Paper 26.2 resource-id normalization at the migration boundary. */
+/** Paper 26.3 resource-id normalization at the migration boundary. */
 public final class LegacyIds {
     private static final Map<String, String> RENAMES = Map.of(
             "minecraft:chain", "minecraft:iron_chain",

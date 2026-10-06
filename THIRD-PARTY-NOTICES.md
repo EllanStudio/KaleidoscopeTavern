@@ -47,7 +47,7 @@ dependencies separately. The build audits both boundaries.
 ### Paper API
 
 - Module used: `paper-api`
-- Version used by this project: 26.2 build 65 beta
+- Version used by this project: 26.3 build 157 beta
 - Project: https://github.com/PaperMC/Paper
 - License: see the upstream repository and individual source notices
 - Distribution: not bundled; supplied by the Paper server

@@ -130,8 +130,8 @@ public final class PluginJarVerifier {
             String pluginYml = readText(archive, "plugin.yml", false);
             require(pluginYml.contains("depend: [CraftEngine, CustomCrops]"),
                     "plugin.yml must require both CraftEngine and CustomCrops");
-            require(pluginYml.contains("api-version: '26.2'"),
-                    "plugin.yml is not pinned to Paper 26.2");
+            require(pluginYml.contains("api-version: '26.3'"),
+                    "plugin.yml is not pinned to Paper 26.3");
 
             JsonObject blocks = jsonObject(archive, "tavern-pack/configuration/blocks.json");
             require(objectSize(blocks, "blocks") == 44,
@@ -186,7 +186,7 @@ public final class PluginJarVerifier {
                             name -> name.startsWith("tavern-pack/resourcepack/assets/")),
                     "Embedded CraftEngine resource pack is empty");
         }
-        System.out.println("Plugin JAR verified: Paper 26.2, CustomCrops "
+        System.out.println("Plugin JAR verified: Paper 26.3, CustomCrops "
                 + customCropsVersion
                 + ", managed CraftEngine project, resource pack and legal notices present");
     }

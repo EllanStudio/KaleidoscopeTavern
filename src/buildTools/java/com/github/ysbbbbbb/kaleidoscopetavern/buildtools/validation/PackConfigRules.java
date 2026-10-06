@@ -544,7 +544,7 @@ public final class PackConfigRules {
                         ? null : model.getAsJsonObject("textures").get("particle").getAsString();
                 if (!"minecraft:block/iron_chain".equals(particle)) {
                     throw new ValidationException(pendantId + "/" + half
-                            + ": Paper 26.2 requires the iron_chain particle texture");
+                            + ": Paper 26.3 requires the iron_chain particle texture");
                 }
                 if (model != null && model.has("elements")) {
                     int elementIndex = 0;

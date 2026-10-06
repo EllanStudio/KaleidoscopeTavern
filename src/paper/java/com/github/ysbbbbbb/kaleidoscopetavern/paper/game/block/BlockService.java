@@ -168,7 +168,7 @@ public final class BlockService {
             if (member.startsWith("#")) {
                 String tagRef = member.substring(1);
                 // Try Bukkit tag API first.  Catch Throwable (not just Exception)
-                // because Paper 26.2 can throw NoSuchMethodError /
+                // because Paper 26.3 can throw NoSuchMethodError /
                 // IncompatibleClassChangeError when the legacy tag API is
                 // accessed at runtime.
                 try {

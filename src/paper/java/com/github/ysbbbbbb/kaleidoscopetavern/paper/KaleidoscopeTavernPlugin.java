@@ -81,7 +81,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Level;
 
-/** Paper 26.2 entry point for the CraftEngine rewrite. */
+/** Paper 26.3 entry point for the CraftEngine rewrite. */
 public final class KaleidoscopeTavernPlugin extends JavaPlugin implements Listener, TabExecutor {
     private static final String NAMESPACE = "kaleidoscope_tavern";
     private static final int EXPECTED_ITEMS = 571; // 157 public items + 414 private render helpers

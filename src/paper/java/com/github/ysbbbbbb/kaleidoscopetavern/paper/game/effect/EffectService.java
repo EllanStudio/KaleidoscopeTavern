@@ -1239,7 +1239,7 @@ public final class EffectService implements Listener {
         particleStates.clear();
         pendingEffectParticleRefresh.clear();
         plugin.getLogger().log(java.util.logging.Level.WARNING,
-                "无法使用 Paper 26.2 效果粒子 metadata 桥接；已禁用 Tavern 装饰粒子", error);
+                "无法使用 Paper 26.3 效果粒子 metadata 桥接；已禁用 Tavern 装饰粒子", error);
     }
 
     private boolean tickEffect(LivingEntity living, ActiveEffect effect) {

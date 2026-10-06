@@ -500,7 +500,7 @@ public final class PlacedDrinkSemanticsValidator {
         }
         if (model.has("render_type")) {
             throw new ValidationException(owner
-                    + ": Forge render_type is ignored by the vanilla 26.2 client");
+                    + ": Forge render_type is ignored by the vanilla 26.3 client");
         }
         if (!model.has("textures")) {
             throw new ValidationException(owner + ": generated translucent model has no textures");
@@ -526,7 +526,7 @@ public final class PlacedDrinkSemanticsValidator {
         }
         if (model.has("render_type")) {
             throw new ValidationException(owner + ": " + resourceId
-                    + " keeps Forge render_type, which the vanilla 26.2 client ignores "
+                    + " keeps Forge render_type, which the vanilla 26.3 client ignores "
                     + "and renders opaque");
         }
     }

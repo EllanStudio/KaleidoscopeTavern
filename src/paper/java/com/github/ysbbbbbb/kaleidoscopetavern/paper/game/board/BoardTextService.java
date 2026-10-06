@@ -634,7 +634,7 @@ public final class BoardTextService implements Listener {
             case CENTER -> 0.0;
         };
         double alignedCenterPixels = alignedCenterUnits / FONT_UNITS_PER_PIXEL;
-        // The 26.2 TextDisplay renderer adds a one-pixel left background margin.
+        // The 26.3 TextDisplay renderer adds a one-pixel left background margin.
         // Counter it so alignment matches TextBlockEntityRender#getPosX exactly.
         origin.add(horizontalRight(origin.getYaw()).multiply(
                 (alignedCenterPixels - 1.0) * SANDWICH_TEXT_SCALE));
@@ -680,7 +680,7 @@ public final class BoardTextService implements Listener {
         return origin;
     }
 
-    /** Returns 26.2 font advance in half-pixel units. */
+    /** Returns 26.3 font advance in half-pixel units. */
     private static int minecraftGlyphAdvanceUnits(int codePoint, boolean bold) {
         if (codePoint == '\t') {
             return (bold ? 20 : 16) * FONT_UNITS_PER_PIXEL;
@@ -700,7 +700,7 @@ public final class BoardTextService implements Listener {
                 advanceUnits += FONT_UNITS_PER_PIXEL;
             }
         } else if (usesFullWidthUnihexGlyph(codePoint)) {
-            // The official 26.2 unifont provider overrides CJK glyphs to
+            // The official 26.3 unifont provider overrides CJK glyphs to
             // 16 source pixels: 16 / 2 + 1 = 9 rendered pixels. Unihex's
             // bold offset is half a pixel rather than the bitmap font's one.
             advanceUnits = 18 + (bold ? 1 : 0);
