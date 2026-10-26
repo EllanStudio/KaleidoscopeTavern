@@ -10,6 +10,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.momirealms.craftengine.bukkit.api.CraftEngineBlocks;
 import net.momirealms.craftengine.core.block.ImmutableBlockState;
+import com.github.ysbbbbbb.kaleidoscopetavern.paper.api.event.TavernDrinkEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
@@ -264,6 +265,7 @@ public final class EffectService implements Listener {
                 && !itemId.equals(PREFIX + "signature_cocktail")) {
             return;
         }
+        Bukkit.getPluginManager().callEvent(new TavernDrinkEvent(event.getPlayer(), consumed));
         for (EffectSpec spec : specs) {
             // ItemService writes every guaranteed vanilla effect from this
             // exact EffectSpec list into potion_contents when a drink is

@@ -1,6 +1,8 @@
 package com.github.ysbbbbbb.kaleidoscopetavern.paper.game.station;
 
 import com.github.ysbbbbbb.kaleidoscopetavern.paper.Messages;
+import com.github.ysbbbbbb.kaleidoscopetavern.paper.api.event.TavernBarrelTapEvent;
+import com.github.ysbbbbbb.kaleidoscopetavern.paper.api.event.TavernShakeEvent;
 import com.github.ysbbbbbb.kaleidoscopetavern.paper.catalog.ContentCatalog;
 import com.github.ysbbbbbb.kaleidoscopetavern.paper.catalog.ContentCatalog.BarrelRecipe;
 import com.github.ysbbbbbb.kaleidoscopetavern.paper.catalog.ContentCatalog.EffectSpec;
@@ -493,6 +495,12 @@ public final class StationService implements Listener {
         }
         items.withShakerState(shaker, ingredients, result.get());
         setHandItem(player, hand, shaker);
+        String resultId = items.id(result.get());
+        String recipeId = recipes.shaker(ingredients.stream().map(items::id).toList())
+                .filter(recipe -> recipe.result().equals(resultId))
+                .map(ContentCatalog.ShakerRecipe::id)
+                .orElse(resultId);
+        Bukkit.getPluginManager().callEvent(new TavernShakeEvent(player, player.getLocation(), recipeId, result.get()));
         player.getWorld().playSound(player.getLocation(),
                 "kaleidoscope_tavern:item.shaker.end", SoundCategory.PLAYERS, 1.0F, 1.0F);
     }
@@ -1101,6 +1109,7 @@ public final class StationService implements Listener {
         }
         FurnitureState state = new FurnitureState(barrel);
         String resultId = state.string("barrel_result");
+        String recipeId = state.string("barrel_recipe");
         int remaining = state.integer("barrel_output");
         Optional<ItemStack> built = items.build(resultId, context)
                 .map(result -> items.withBrewLevel(result, brewLevel(state)));
@@ -1111,6 +1120,10 @@ public final class StationService implements Listener {
         if (remaining == 1) {
             state.clear("barrel_recipe", "barrel_result", "barrel_output", "barrel_unit",
                     "barrel_started", "barrel_level", "barrel_time");
+        }
+        if (context != null) {
+            Bukkit.getPluginManager().callEvent(new TavernBarrelTapEvent(context, barrel.location(),
+                    recipeId == null ? resultId : recipeId, built.get()));
         }
         return true;
     }
