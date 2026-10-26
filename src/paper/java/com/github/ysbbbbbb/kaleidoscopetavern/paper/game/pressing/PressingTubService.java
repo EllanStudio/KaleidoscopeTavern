@@ -26,6 +26,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.SoundCategory;
+import com.github.ysbbbbbb.kaleidoscopetavern.paper.api.event.TavernPressEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -237,6 +239,8 @@ public final class PressingTubService implements PressingTubBlockBehavior.Handle
                 cePlayer.giveItem(BukkitAdaptor.adapt(result.get()));
                 tub.updateState(current -> new PressingTubState(
                         current.ingredient(), null, 0));
+                Bukkit.getPluginManager().callEvent(new TavernPressEvent(
+                        (Player) cePlayer.platformPlayer(), location, recipe.get().id(), result.get()));
                 location.getWorld().playSound(location,
                         "minecraft:item.bucket.fill", SoundCategory.BLOCKS, 1.0F, 1.0F);
                 cePlayer.swingHand(hand);
