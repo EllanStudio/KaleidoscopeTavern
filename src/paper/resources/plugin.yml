@@ -1,8 +1,8 @@
 name: KaleidoscopeTavern
 version: '${version}'
 main: com.github.ysbbbbbb.kaleidoscopetavern.paper.KaleidoscopeTavernPlugin
-description: Kaleidoscope Tavern rewritten for Paper 26.2 and CraftEngine.
-api-version: '26.2'
+description: Kaleidoscope Tavern rewritten for Paper 26.3 and CraftEngine.
+api-version: '26.3'
 authors: [ysbbbbbb, tartaric_acid]
 website: https://github.com/EllanServer/KaleidoscopeTavern
 depend: [CraftEngine, CustomCrops]

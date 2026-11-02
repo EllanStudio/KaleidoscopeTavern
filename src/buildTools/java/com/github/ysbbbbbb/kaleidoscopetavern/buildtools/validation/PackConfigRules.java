@@ -155,18 +155,19 @@ public final class PackConfigRules {
         JsonObject worldgen = readConfig("worldgen.json");
         JsonObject chain = worldgen.getAsJsonObject("configured_features")
                 .getAsJsonObject(NAMESPACE + ":wild_grapevine_chain");
-        JsonObject chainConfig = chain.getAsJsonObject("config");
+        // CraftEngine 26.3 worldgen format: feature fields are flat (no "config" wrapper).
+        JsonObject chainConfig = chain;
         JsonArray layers = chainConfig.getAsJsonArray("layers");
         if (!chain.get("type").getAsString().equals("minecraft:block_column")
                 || !chainConfig.get("direction").getAsString().equals("down")
                 || layers.size() != 2
                 || !layers.get(0).getAsJsonObject().get("height").equals(uniformHeight(0, 6))
                 || !layers.get(0).getAsJsonObject().getAsJsonObject("provider")
-                        .getAsJsonObject("state").get("Name").getAsString()
+                        .getAsJsonObject("state").get("id").getAsString()
                         .equals(NAMESPACE + ":wild_grapevine_plant")
                 || layers.get(1).getAsJsonObject().get("height").getAsInt() != 1
                 || !layers.get(1).getAsJsonObject().getAsJsonObject("provider")
-                        .getAsJsonObject("state").get("Name").getAsString()
+                        .getAsJsonObject("state").get("id").getAsString()
                         .equals(NAMESPACE + ":wild_grapevine")) {
             throw new ValidationException("Wild grapevine feature must hang body segments above a head");
         }
@@ -2976,9 +2977,9 @@ public final class PackConfigRules {
                 || !expectedShakerConsumable.equals(shakerComponents.get("minecraft:consumable"))
                 || !expectedShakerConsumable.equals(nestedObject(shakerItem, "client_bound_data", "components")
                         .get("minecraft:consumable"))
-                || !expectedShakerSwing.equals(shakerComponents.get("minecraft:swing_animation"))
+                || !expectedShakerSwing.equals(shakerComponents.get("minecraft:interact_animation"))
                 || !expectedShakerSwing.equals(nestedObject(shakerItem, "client_bound_data", "components")
-                        .get("minecraft:swing_animation"))) {
+                        .get("minecraft:interact_animation"))) {
             throw new ValidationException(
                     "Shaker must use the spyglass pose with NONE swing style, 4-tick triggers and a static held cup");
         }

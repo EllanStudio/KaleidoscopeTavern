@@ -508,12 +508,12 @@ public final class ItemService {
             if (!stack.hasData(DataComponentTypes.CONSUMABLE)) {
                 stack.setData(DataComponentTypes.CONSUMABLE, SHAKER_CONSUMABLE);
             }
-            if (!stack.hasData(DataComponentTypes.SWING_ANIMATION)) {
-                stack.setData(DataComponentTypes.SWING_ANIMATION, SHAKER_SWING_ANIMATION);
+            if (!stack.hasData(DataComponentTypes.INTERACT_ANIMATION)) {
+                stack.setData(DataComponentTypes.INTERACT_ANIMATION, SHAKER_SWING_ANIMATION);
             }
         } else {
             stack.unsetData(DataComponentTypes.CONSUMABLE);
-            stack.unsetData(DataComponentTypes.SWING_ANIMATION);
+            stack.unsetData(DataComponentTypes.INTERACT_ANIMATION);
         }
         return stack;
     }

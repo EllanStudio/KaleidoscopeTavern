@@ -3179,7 +3179,7 @@
             "animation": "spyglass",
             "has_consume_particles": false
           },
-          "minecraft:swing_animation": {
+          "minecraft:interact_animation": {
             "type": "none",
             "duration": 4
           }
@@ -3661,7 +3661,7 @@
             "animation": "spyglass",
             "has_consume_particles": false
           },
-          "minecraft:swing_animation": {
+          "minecraft:interact_animation": {
             "type": "none",
             "duration": 4
           }

@@ -2,38 +2,36 @@
   "configured_features": {
     "kaleidoscope_tavern:wild_grapevine_chain": {
       "type": "minecraft:block_column",
-      "config": {
-        "direction": "down",
-        "allowed_placement": {
-          "type": "minecraft:matching_blocks",
-          "blocks": "minecraft:air"
-        },
-        "prioritize_tip": true,
-        "layers": [
-          {
-            "height": {
-              "type": "minecraft:uniform",
-              "min_inclusive": 0,
-              "max_inclusive": 6
-            },
-            "provider": {
-              "type": "minecraft:simple_state_provider",
-              "state": {
-                "Name": "kaleidoscope_tavern:wild_grapevine_plant"
-              }
-            }
+      "direction": "down",
+      "allowed_placement": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "prioritize_tip": true,
+      "layers": [
+        {
+          "height": {
+            "type": "minecraft:uniform",
+            "min_inclusive": 0,
+            "max_inclusive": 6
           },
-          {
-            "height": 1,
-            "provider": {
-              "type": "minecraft:simple_state_provider",
-              "state": {
-                "Name": "kaleidoscope_tavern:wild_grapevine"
-              }
+          "provider": {
+            "type": "minecraft:simple",
+            "state": {
+              "id": "kaleidoscope_tavern:wild_grapevine_plant"
             }
           }
-        ]
-      }
+        },
+        {
+          "height": 1,
+          "provider": {
+            "type": "minecraft:simple",
+            "state": {
+              "id": "kaleidoscope_tavern:wild_grapevine"
+            }
+          }
+        }
+      ]
     }
   },
   "placed_features": {

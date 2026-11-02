@@ -136,12 +136,12 @@ public final class ItemMigrationStage {
             if (id.equals("shaker")) { components(data).addProperty("minecraft:max_stack_size",1);
                 configureConsumable(config,obj("consume_seconds",3600.0,"animation","spyglass","has_consume_particles",false));
                 JsonObject swing=obj("type","none","duration",4);
-                components(data).add("minecraft:swing_animation",swing.deepCopy());
+                components(data).add("minecraft:interact_animation",swing.deepCopy());
                 JsonObject cbd=config.has("client_bound_data")?config.getAsJsonObject("client_bound_data"):new JsonObject();
                 config.add("client_bound_data",cbd);
                 JsonObject cbdComponents=cbd.has("components")?cbd.getAsJsonObject("components"):new JsonObject();
                 cbd.add("components",cbdComponents);
-                cbdComponents.add("minecraft:swing_animation",swing.deepCopy());
+                cbdComponents.add("minecraft:interact_animation",swing.deepCopy());
                 config.add("model", shakerModel()); }
             if (id.equals("molotov")) { configureConsumable(config,obj("consume_seconds",3600.0,"animation","trident","has_consume_particles",false));
                 config.add("model",obj("type","minecraft:condition","property","minecraft:using_item","on_true",model("molotov_charging"),"on_false",model("molotov"))); }

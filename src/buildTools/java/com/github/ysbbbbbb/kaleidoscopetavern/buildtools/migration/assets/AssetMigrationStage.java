@@ -229,7 +229,8 @@ public final class AssetMigrationStage {
     public void writeWorldgenFeatures() throws IOException {
         JsonObject configured = new JsonObject();
         configured.addProperty("type", "minecraft:block_column");
-        JsonObject config = new JsonObject();
+        // CraftEngine 26.3 worldgen format: feature fields are flat (no "config" wrapper).
+        JsonObject config = configured;
         config.addProperty("direction", "down");
         JsonObject allowed = new JsonObject();
         allowed.addProperty("type", "minecraft:matching_blocks");
@@ -244,23 +245,22 @@ public final class AssetMigrationStage {
         height0.addProperty("max_inclusive", 6);
         layer0.add("height", height0);
         JsonObject provider0 = new JsonObject();
-        provider0.addProperty("type", "minecraft:simple_state_provider");
+        provider0.addProperty("type", "minecraft:simple");
         JsonObject state0 = new JsonObject();
-        state0.addProperty("Name", NAMESPACE + ":wild_grapevine_plant");
+        state0.addProperty("id", NAMESPACE + ":wild_grapevine_plant");
         provider0.add("state", state0);
         layer0.add("provider", provider0);
         layers.add(layer0);
         JsonObject layer1 = new JsonObject();
         layer1.addProperty("height", 1);
         JsonObject provider1 = new JsonObject();
-        provider1.addProperty("type", "minecraft:simple_state_provider");
+        provider1.addProperty("type", "minecraft:simple");
         JsonObject state1 = new JsonObject();
-        state1.addProperty("Name", NAMESPACE + ":wild_grapevine");
+        state1.addProperty("id", NAMESPACE + ":wild_grapevine");
         provider1.add("state", state1);
         layer1.add("provider", provider1);
         layers.add(layer1);
         config.add("layers", layers);
-        configured.add("config", config);
         JsonObject placed = new JsonObject();
         JsonArray dimensions = new JsonArray();
         dimensions.add("minecraft:overworld");
