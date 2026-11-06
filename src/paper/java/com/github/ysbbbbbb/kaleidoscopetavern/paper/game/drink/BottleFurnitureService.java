@@ -100,8 +100,13 @@ public final class BottleFurnitureService implements Listener {
         // CE's furniture_item loot already returns the exact sourceItem for a
         // single bottle. Only a genuinely expanded stack needs a custom drop
         // list and suppression of CE's one-item loot table.
-        List<ItemStack> stored = new FurnitureState(event.furniture())
-                .items("bottle_items");
+        List<ItemStack> stored;
+        try {
+            stored = new FurnitureState(event.furniture()).items("bottle_items");
+        } catch (IllegalStateException missingStateController) {
+            // No state means no stored bottles; CE's own loot still drops the item.
+            return;
+        }
         if (stored.isEmpty()) {
             return;
         }
